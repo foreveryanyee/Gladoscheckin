@@ -1,6 +1,7 @@
 import requests
 import json
 import os
+import re
 # -------------------------------------------------------------------------------------------
 # github workflows
 # -------------------------------------------------------------------------------------------
@@ -41,19 +42,21 @@ if __name__ == '__main__':
             result = checkin.json()     
             # 获取签到结果
             status = result.get('message')
-
+            change = int(float(result['list'][0]['change']))
+            point = int(float(result['list'][0]['balance']))
+            
             # 获取账号当前状态
-            result = state.json()
+            result2 = state.json()
             # 获取剩余时间
-            leftdays = int(float(result['data']['leftDays']))
+            leftdays = int(float(result2['data']['leftDays']))
             # 获取账号email
-            email = result['data']['email']
+            email = result2['data']['email']
 
-            if status == "Checkin! Get 1 Day":
+            if re.search("Checkin! Got",status):
                 success += 1
-                message_status = "签到成功，会员天数 + 1"
-            elif status == "Checkin Repeats! Please Try Tomorrow":
-                message_status = "今日已签到"
+                message_status = "签到成功, 积分+" + str(change) 
+            elif re.search("Please Try Tomorrow",status):
+                message_status = "今日已签到, 当前积分: " + str(point)
             else:
                 fail += 1
                 message_status = "签到失败，请检查..."
