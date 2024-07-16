@@ -42,6 +42,7 @@ if __name__ == '__main__':
             result = checkin.json()     
             # 获取签到结果
             status = result.get('message')
+            print(result)
             change = int(float(result['list'][0]['change']))
             point = int(float(result['list'][0]['balance']))
             
