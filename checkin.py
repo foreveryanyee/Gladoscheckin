@@ -42,10 +42,13 @@ if __name__ == '__main__':
             result = checkin.json()     
             # 获取签到结果
             status = result.get('message')
-            print(result)
-            change = int(float(result['list'][0]['change']))
-            point = int(float(result['list'][0]['balance']))
-            
+            if len(result['list'])>0 :
+                change = int(float(result['list'][0]['change']))
+                point = int(float(result['list'][0]['balance']))
+            else:
+                change = 999
+                point = 999
+                
             # 获取账号当前状态
             result2 = state.json()
             # 获取剩余时间
