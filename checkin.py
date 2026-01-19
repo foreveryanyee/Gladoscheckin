@@ -28,7 +28,7 @@ if __name__ == '__main__':
     origin = "https://glados.cloud"
     useragent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/102.0.0.0 Safari/537.36"
     payload = {
-        'token': 'glados.one'
+        'token': 'glados.cloud'
     }
 
     for cookie in cookies:
@@ -90,4 +90,5 @@ if __name__ == '__main__':
         plusurl = f"http://www.pushplus.plus/send?token={sckey}&title={title}&content={sendContent}"
         r = requests.get(plusurl)
         print(r.status_code)
+
 
