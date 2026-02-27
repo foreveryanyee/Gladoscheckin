@@ -40,6 +40,7 @@ if __name__ == '__main__':
         if checkin.status_code == 200:
             # 解析返回的json数据
             result = checkin.json()     
+            print(result)
             # 获取签到结果
             status = result.get('message')
             if len(result['list'])>0 :
@@ -90,5 +91,6 @@ if __name__ == '__main__':
         plusurl = f"http://www.pushplus.plus/send?token={sckey}&title={title}&content={sendContent}"
         r = requests.get(plusurl)
         print(r.status_code)
+
 
 
